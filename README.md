@@ -1,2 +1,2 @@
-Code Examples which shows how to use Rcpp package
+Code Examples which show how to use Rcpp package
 --
