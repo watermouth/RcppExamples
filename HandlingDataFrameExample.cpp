@@ -39,7 +39,7 @@ RcppExport SEXP ex3(DataFrame input, int i){
 // [[Rcpp::export]]
 RcppExport SEXP ex4(DataFrame input, int i){
   i--;
-  BEGIN_RCPP
+  BEGIN_RCPP // This example doesn't work as I thoughts
   if( i < 0 )
     throw std::range_error("too small");
   List names = input.names();
@@ -54,6 +54,50 @@ RcppExport SEXP ex4(DataFrame input, int i){
 //  return(*it); cannot convert 'double' to "SEXPREC*" in return
   return(input);
 }
+
+void ex5_helper(DataFrame input, int i, double replace){
+  NumericVector x = input[i];
+  for(NumericVector::iterator it = x.begin(); it != x.end(); it++){
+    *it = replace;
+  }
+}
+
+// [[Rcpp::export]]
+RcppExport SEXP ex5(DataFrame input, int i, double replace){
+  ex5_helper(input, i, replace);
+  return(input);
+}
+
+void ex6_helper(NumericVector::iterator it, NumericVector::iterator end, double replace){
+  for(;it!= end; it++){
+    *it = replace;
+  }
+}
+
+// [[Rcpp::export]]
+RcppExport SEXP ex6(DataFrame input, int i, double replace){
+  NumericVector x = input[i];
+  ex6_helper(x.begin(), x.end(), replace);
+  return(input);
+}
+
+
+// [[Rcpp:export]]
+RcppExport SEXP ex700(DataFrame input, IntegerVector i_vec){ // doesn't found 
+  for(int i=0; i<i_vec.size(); i++){
+    
+  }
+  return(input);
+}
+
+// [[Rcpp::export]]
+RcppExport SEXP ex7_breakDF(DataFrame input, NumericVector index){ // can be seen from R
+  for(int i_col=0; i_col<index.size(); i_col++){
+    input[i_col] = 0;
+  }
+  return(input);
+}
+
 
 /*** R
 df1 <- data.frame(a=1,b=3,name="light")
@@ -71,8 +115,16 @@ buysell <- c(0,1,0,1,1,1,0,1,0,0)
 lots <- c(seq(from=1000,to=5000,by=1000), 1000, 1000, 10000, 8000, 2000)
 price <- seq(from=78,to=87,along.with=tdate)
 df3 <- data.frame(tdate,ttime,buysell,lots,price)
-out3 <- ex3(df3,0)
+df4 <- df3
+df5 <- df3
+df6 <- df3
+df7 <- df3
 
+out3 <- ex3(df3,1)
+out4 <- ex4(df4,2)
+out5 <- ex5(df5,1,0.7)
+out6 <- ex6(df6,1,0.5)
+out7 <- ex7_breakDF(df7,1:2) 
 
 */
 
