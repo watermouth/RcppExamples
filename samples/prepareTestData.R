@@ -9,7 +9,7 @@ price <- seq(from=78,to=87,along.with=tdate)
 
 df <- data.frame(tdate,ttime,buysell,lots,price)
 
-numRate <- 100000
+numRate <- 10
 # mid_rate <- rep(80.001,numRate);
 mid_rate <- rnorm(n=numRate,mean=80,sd=5)
 bid_rate <- mid_rate - 0.001

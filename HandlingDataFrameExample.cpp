@@ -83,7 +83,7 @@ RcppExport SEXP ex6(DataFrame input, int i, double replace){
 
 
 // [[Rcpp:export]]
-RcppExport SEXP ex700(DataFrame input, IntegerVector i_vec){ // doesn't found 
+RcppExport SEXP ex700(DataFrame input, IntegerVector i_vec){ // can't be found 
   for(int i=0; i<i_vec.size(); i++){
     
   }
@@ -115,10 +115,10 @@ buysell <- c(0,1,0,1,1,1,0,1,0,0)
 lots <- c(seq(from=1000,to=5000,by=1000), 1000, 1000, 10000, 8000, 2000)
 price <- seq(from=78,to=87,along.with=tdate)
 df3 <- data.frame(tdate,ttime,buysell,lots,price)
-df4 <- df3
-df5 <- df3
-df6 <- df3
-df7 <- df3
+df4 <- data.frame(tdate,ttime,buysell,lots,price)
+df5 <- data.frame(tdate,ttime,buysell,lots,price)
+df6 <- data.frame(tdate,ttime,buysell,lots,price)
+df7 <- data.frame(tdate,ttime,buysell,lots,price)
 
 out3 <- ex3(df3,1)
 out4 <- ex4(df4,2)
